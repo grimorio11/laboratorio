@@ -1,0 +1,28 @@
+name: Build Feature
+
+on:
+  push:
+    branches: [ "feature/*" ]
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-feature:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: pull and checking out from git repository
+        run: |
+            echo "pulling and checking out from git repository"
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin' # See 'Supported distributions' for available options
+          java-version: '17'
+          
+      - name: Build with maven
+        run: |
+          mvnw clean install
+          echo "build with maven"
