@@ -13,7 +13,7 @@ on:
     branches: [ "feature/*" ]
   pull_request:
     branches:
-      - development
+      - devel
 
 jobs:
   build-feature:
