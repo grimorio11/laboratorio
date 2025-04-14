@@ -10,10 +10,11 @@ name: Build Feature
 
 on:
   push:
-    branches: [ "feature/*" ]
-#  pull_request:
-#    branches:
-#      - devel
+    branches: [ "master" ]
+  pull_request:
+    branches:
+      - master
+
 
 jobs:
   build-feature:
