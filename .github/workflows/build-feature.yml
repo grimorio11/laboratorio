@@ -11,9 +11,9 @@ name: Build Feature
 on:
   push:
     branches: [ "feature/*" ]
-  pull_request:
-    branches:
-      - devel
+#  pull_request:
+#    branches:
+#      - devel
 
 jobs:
   build-feature:
