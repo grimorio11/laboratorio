@@ -18,7 +18,7 @@ on:
 
 =======
   pull_request:
-    branches: [ development ]
+    branches: [ devel ]
     types: [ opened, reopened ]
 >>>>>>> f8b4eb9 (Add cache maven)
 
