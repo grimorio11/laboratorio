@@ -6,32 +6,50 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Build Feature
+name: Build features and test feature branch
 
 on:
+<<<<<<< HEAD
   push:
     branches: [ "master" ]
   pull_request:
     branches:
       - master
 
+=======
+  pull_request:
+    branches: [ development ]
+    types: [ opened, reopened ]
+>>>>>>> f8b4eb9 (Add cache maven)
 
 jobs:
-  build-feature:
-    runs-on: ubuntu-latest
+  build:
+    runs-on: ubuntu-latest  #self-hosted
     steps:
-      - uses: actions/checkout@v4
-      - name: pull and checking out from git repository
-        run: |
-            echo "pulling and checking out from git repository"
+    - uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin' 
-          java-version: '17'
+    - name: Pull and checkout from git repository
+      run: |
+        echo "pulling and checking out from git repository"
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: 'maven'
+
+    - name: Cache maven dependencies
+      uses: actions/cache@v4
+      with: 
+        path: ~/.m2/repository
+        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+        restore-keys: |
+          ${{ runner.os }}-maven-
           
-      - name: Build with maven
-        run: |
-          mvn clean install
-          echo "build with maven"
+    - name: build with maven
+      run: |
+        echo "building with maven"
+        mvn clean install
