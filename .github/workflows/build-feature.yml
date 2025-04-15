@@ -9,18 +9,10 @@
 name: Build features and test feature branch
 
 on:
-<<<<<<< HEAD
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches:
-      - master
-
-=======
   pull_request:
     branches: [ devel ]
     types: [ opened, reopened ]
->>>>>>> f8b4eb9 (Add cache maven)
+
 
 jobs:
   build:
