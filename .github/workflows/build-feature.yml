@@ -10,7 +10,7 @@ jobs:
       #############################################################
       # 2- dowload code from feature branch , setup java 8 and check that source code is buildable
       ########################################################
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           
@@ -19,13 +19,13 @@ jobs:
            echo "pulling and checking out from git repository"
 
       - name: setup java 17 
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin' # See 'Supported distributions' for available options
           java-version: '17'
 
       - name: Cache Maven dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
@@ -53,7 +53,7 @@ jobs:
       # 1- Dowload source code
       #Only a single commit is fetched by default, for the ref/SHA that triggered the workflow, Set fetch-depth: 0 to fetch all history for all branches and tags
       ########################################################
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           #Dowload the code from destination branch (develop)
           ref: ${{ github.base_ref }}
@@ -86,7 +86,7 @@ jobs:
       ######################################################## 
       - name: trigger deploy artifact
         if: success()
-        uses: peter-evans/repository-dispatch@v2
+        uses: peter-evans/repository-dispatch@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
