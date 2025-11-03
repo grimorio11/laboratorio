@@ -40,6 +40,5 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=laboratorio -Dsonar.projectName='laboratorio'
       - name: Sonar
-        needs: analyze
-        if: success()
+        if: failure()
         run: echo "Prueba finalizada"
